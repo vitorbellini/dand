@@ -1,0 +1,1 @@
+Project to assess the stroop effect experiment, based on 24 subjects results. The main objective of this project is to use descriptive and inferential statistics knowledge to present some interpretation of the data.
