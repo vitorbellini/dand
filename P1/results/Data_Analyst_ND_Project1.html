@@ -11851,7 +11851,8 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Hypothesis-testing">Hypothesis testing<a class="anchor-link" href="#Hypothesis-testing">&#182;</a></h3><ul>
 <li><em>The <strong>null hypothesis ($H_0$)</strong> is that the type of list (congruent of incongruent) does not intefere the reaction time of the task. $\mu_c = \mu_i$ ($\mu_c$ as the population mean of reaction time on reading the congruent list and $\mu_i$ as the population mean of reaction time on reading the incongruent list)</em></li>
-<li><p><em>The <strong>alternative hypothesis ($H_a$)</strong> is that incongruent lists take more time to be read than the congruent. Therefore, it would be an one-tailed test since it would be just verified if $\mu_c < \mu_i$</em></p>
+<li><em>The <strong>alternative hypothesis ($H_a$)</strong> is that incongruent lists take more time to be read than the congruent. Therefore, it would be an one-tailed test since it would be just verified if $\mu_c < \mu_i$</em></li>
+<li><p><em>The choice of one-tailed test is justified by our prediction that the incongruent list takes more time to read than the congruent. Therefore, with the</em> $H_a: \mu_c < \mu_i$ <em>, if rejected the null hypothesis, our assumption is stronger than if the alternative hypothesis was</em>  $H_a: \mu_c != \mu_i$</p>
 <ul>
 <li>$H_0: \mu_c = \mu_i$</li>
 <li>$H_a: \mu_c < \mu_i$</li>
@@ -11868,7 +11869,19 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Statistical-test">Statistical test<a class="anchor-link" href="#Statistical-test">&#182;</a></h3><ul>
-<li><em>The condition of the experiment suggests that the best approach to evaluate the result is <strong>dependent t-test for paired samples</strong>, because it was given, for the same subject, two conditions (congruent and incongruent list) to compare the performance.</em></li>
+<li><em>The condition of the experiment suggests that the best approach to evaluate the result is <strong>dependent t-test for paired samples</strong>, because it was given, for the same subject, two conditions (congruent and incongruent list) to compare the performance.</em><p></li>
+<li><em>the t-test is appropriate due to the following conditions:</em><ul>
+<li><em>We do not know the population parameters</em> $\mu$ <em>and</em> $\sigma$</li>
+<li><em>We only have two samples (the time to read congruent and incongruent lists) to draw our conclusions</em></li>
+<li><em>We want to check how different the sample means are from each other</em></li>
+<li><em>It's a dependent t-test for paired samples because the subject has taken the test twice (time to read the congruent list and inconrguent list). It's a within-subject designs with two conditions (the congruent and incongruent list)</em></li>
+<li><em>The distribution of the the dependent variable are normal bell-shaped</em></li>
+<li><em>As we have a sample less than 30</em> ($n = 25$) <em>t-tests are suitable, since with</em> $n > 30$ <em>the t-distribution is very close to the standard normal distribution. So, with</em> $n < 30$ <em>, the central limit theory will present a good result approximating the sample standard deviation from the population standard deviation</em> ($SE = \frac{\sigma}{\sqrt{n}}$)</li>
+<li><em>From the graph below, blue is the t-distribution with df = 30 and red it standard normal distribution</em> (<a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">wikipedia</a>)
+<img src="img/t_distribution.svg" alt="t-distribution"></li>
+<li><em>Since z-tests are suitable when we know the populational</em> $\mu$ <em>and</em> $\sigma$ <em>and the f-test is suitable when we want to compare more than 2 conditions, and all the presented above, the t-test is the most appropriated statistical test on this cenario</em></li>
+</ul>
+</li>
 </ul>
 <p><em>To run a t-test, some criterias must be considered, as verified by the following records.</em></p>
 <ul>
@@ -11918,7 +11931,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -11931,11 +11944,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../documents/stroop_effect.csv&#39;</span><span class="p">)</span>
-<span class="n">df</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">dataFrame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../documents/stroop_effect.csv&#39;</span><span class="p">)</span>
+<span class="n">dataFrame</span>
 </pre></div>
 
 </div>
@@ -11947,7 +11960,7 @@ div#notebook {
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[2]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12172,9 +12185,21 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>line chart comparing the congruent and incongruent times</em></p>
+<p><em><strong>line chart comparing the congruent and incongruent times</strong></em></p>
 <p><img src="img/line_chart.png" alt="line chart"></p>
 <p><em>From this line chart is possible to identify that all the subjects of the experiment has taken more time to read the incongruent list than the congruent. This can be interpreted as a good indicator for the alternative hypothesis</em> ($H_a$) <em>but it is necessary to confirm if the longer time taken has statistical significance.</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em><strong>scatterplot from congruent and incongruent times</strong></em>
+<img src="img/scatter.png" alt="scatterplot"></p>
+<p><em>From the scatterplot graph is possible to identify some outliers on both congruent and incongruent times, with more occurrences on the incongruent times. It seems to make sense, since the incongruent lists should have more impactant effect, presenting more variation</em></p>
 
 </div>
 </div>
@@ -12420,6 +12445,7 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><em>To reject</em> $H_0$ <em>is necessary evidence that the difference between the time taken to read the congruent and incongruent lists are not due to chance (i.e. it's because the type of list). The probability that with t = 8.021 and df = 23 could be due to chance is smaller than 0.0001, much lower than our alpha level of 0.05. Therefore, we have statistical proof that the type of list influence the time taken to read, implying in rejecting the null hypothesis</em> $H_0$.</p>
+<p><em>As we used the bessels-correction to the samples standard deviation</em> ($s = \sqrt{\frac{\sum{(x-\bar{x})^2}}{n-1}}$) <em>and the theorem of central limit</em> ($s = \frac{\sigma}{\sqrt{n}}$) <em>with the objective to approximate the samples to the populational condition, our hypothesis test lead us to a broader conclusion: that exists statistically significance difference between the two population means.</em></p>
 <p><em>Further on, 74% of the variation on the time used to read a list can be explained by the type of the list (congruent or incongruent).</em></p>
 <p><em>Visually, we can compare our t-critical value (for $\alpha = .05$ and $df = 23$) and the t-statistic for the dependent t-test for paired samples on the graph below. It's possible to see how much more unlikely was to get the t-statistic by chance than our t-critical value for 95% of confidence.</em></p>
 <p><img src="img/t_test_hypothesis.png" alt="t-test hypothesis"></p>
@@ -12432,7 +12458,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="6.-What-can-explain-this-effect?">6. What can explain this effect?<a class="anchor-link" href="#6.-What-can-explain-this-effect?">&#182;</a></h4><p><em>There are some theories to explain the stroop effect. The main idea is that the brain should process diferently colors and words and that it affects the time to read the list when the words and colors are unmatched. Variations on the unmatched lists are suggested on the Faculty of Washington stroop effect <a href="https://faculty.washington.edu/chudler/words.html#seffect">page</a>, such as rotating the words, using non-colors words, non-sense words, etc.</em></p>
+<h4 id="6.-What-can-explain-this-effect?">6. What can explain this effect?<a class="anchor-link" href="#6.-What-can-explain-this-effect?">&#182;</a></h4><p><em>There are some theories to explain the stroop effect. The main idea is that the brain should process diferently colors and words and that it affects the time to read the list when the words and colors are unmatched. Variations on the unmatched lists are suggested on the Faculty of Washington stroop effect <a href="https://faculty.washington.edu/chudler/words.html#seffect">page</a>, such as rotating the words, using non-colors words, non-sense words, etc. Maybe this kind of effect could be also identified on a longitudinal tests, comparing brain's performance by age, as known that as we age, loss of brain connections slows our reaction time (<a href="https://psychcentral.com/news/2010/09/13/as-we-age-loss-of-brain-connections-slows-our-reaction-time/18031.html">psychcentral</a>).</em></p>
 <p><em>If we assume that the stroop effect shows the concurrence between attention on the brain, executing paralels actions showld degrade the performance, like drive and text on the phone, studying with the tv on, and so on.</em></p>
 <p>
 
@@ -12452,9 +12478,11 @@ div#notebook {
 <li><a href="https://en.wikipedia.org/wiki/Stroop_effect">Stroop effect on wikipedia</a></li>
 <li><a href="http://www.investopedia.com/ask/answers/073115/what-assumptions-are-made-when-conducting-ttest.asp">t-tests assumptions on Investopedia</a></li>
 <li><a href="http://www.statisticssolutions.com/manova-analysis-paired-sample-t-test/">Paired sample t-tests on statistics solutions</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">t-distribution on wikipedia</a></li>
 <li><a href="https://s3.amazonaws.com/udacity-hosted-downloads/t-table.jpg">t-table</a></li>
 <li><a href="http://www.graphpad.com/quickcalcs/pValue1/">Calculating p-value on Graphpad</a></li>
 <li><a href="http://my.ilstu.edu/~jhkahn/apastats.html">APA Style for statistics</a></li>
+<li><a href="https://psychcentral.com/news/2010/09/13/as-we-age-loss-of-brain-connections-slows-our-reaction-time/18031.html">As we age, loss of brain connections slows our reaction time</a></li>
 </ul>
 
 </div>
