@@ -1,1 +1,1 @@
-Project to assess the stroop effect experiment, based on 24 subjects results. The main objective of this project is to use descriptive and inferential statistics knowledge to present some interpretation of the data.
+Project to assess the numpy, pandas and matplotlib python libraries knowledge. The main objective of this project is to use data analysis python libraries to wrange, explore, draw conclusions and communicate findings on the titanic dataset.
