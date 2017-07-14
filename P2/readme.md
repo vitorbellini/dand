@@ -1,0 +1,1 @@
+Project to assess the numpy, pandas and matplotlib python libraries knowledge. The main objective of this project is to use data analysis python libraries to wrange, explore, draw conclusions and communicate findings on the titanic dataset.
