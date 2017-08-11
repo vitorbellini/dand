@@ -11726,7 +11726,9 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}@media print {
+}
+
+@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11747,7 +11749,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11771,11 +11773,12 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="P2:-Investiganting-a-dataset">P2: Investiganting a dataset<a class="anchor-link" href="#P2:-Investiganting-a-dataset">&#194;&#182;</a></h1><p>This is the project 2 of the Udacity's Data Analyst Nanodegree. It's build upon the introduction to data analysis course and has the main objectives to use knwoledge on pandas, numpy and matplotlib python libraries at the end-to-end process of data analysis. In this project we're going to go through all the five steps of the data analysis process, such as:</p>
+<h1 id="P2:-Investigating-a-dataset">P2: Investigating a dataset<a class="anchor-link" href="#P2:-Investigating-a-dataset">&#182;</a></h1><p>This is the project 2 of the Udacity's Data Analyst Nanodegree. It's build upon the introduction to data analysis course and has the main objectives to use knwoledge on pandas, numpy and matplotlib python libraries at the end-to-end process of data analysis. In this project we're going to go through all the five steps of the data analysis process, such as:</p>
 
 </div>
 </div>
@@ -11806,9 +11809,7 @@ div#notebook {
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Populating the interactive namespace from numpy and matplotlib
@@ -11848,9 +11849,7 @@ div#notebook {
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[283]:</div>
-
 
 
 
@@ -11861,9 +11860,7 @@ div#notebook {
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -12106,22 +12103,24 @@ AACw4v8CFtI5gMMVrDoAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="1.-The-Dataset">1. The Dataset<a class="anchor-link" href="#1.-The-Dataset">&#194;&#182;</a></h1><p>RMS Titanic was a British passenger liner that sank in the North Atlantic Ocean in the early morning of 15 April 1912, after colliding with an iceberg during her maiden voyage from Southampton to New York City. Of the estimated 2,224 passengers and crew aboard, more than 1,500 died, making it one of the deadliest commercial peacetime maritime disasters in modern history. The key fact is that the ship was carring engough lifeboats for only 1,178 people, raising the question of the survivors patterns. (<a href="https://en.wikipedia.org/wiki/RMS_Titanic">wikipedia</a>)</p>
+<h1 id="1.-The-Dataset">1. The Dataset<a class="anchor-link" href="#1.-The-Dataset">&#182;</a></h1><p>RMS Titanic was a British passenger liner that sank in the North Atlantic Ocean in the early morning of 15 April 1912, after colliding with an iceberg during her maiden voyage from Southampton to New York City. Of the estimated 2,224 passengers and crew aboard, more than 1,500 died, making it one of the deadliest commercial peacetime maritime disasters in modern history. The key fact is that the ship was carring engough lifeboats for only 1,178 people, raising the question of the survivors patterns. (<a href="https://en.wikipedia.org/wiki/RMS_Titanic">wikipedia</a>)</p>
 <p><img src="imgs/titanic.jpg" alt="titanic"></p>
 <p>For this project, it will be investigated the dataset of titanic, with demographic data and informations of 891 out 2,224 passengers and crew on board of the ship. This dataset has information about sex, age, ticket class, if has relatives on board, the port of embarkation and if has survived or not the accident.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.1-Data-Dictionary">1.1 Data Dictionary<a class="anchor-link" href="#1.1-Data-Dictionary">&#194;&#182;</a></h2>
+<h2 id="1.1-Data-Dictionary">1.1 Data Dictionary<a class="anchor-link" href="#1.1-Data-Dictionary">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12158,9 +12157,7 @@ AACw4v8CFtI5gMMVrDoAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Index([u&#39;PassengerId&#39;, u&#39;Survived&#39;, u&#39;Pclass&#39;, u&#39;Name&#39;, u&#39;Sex&#39;, u&#39;Age&#39;,
@@ -12175,7 +12172,8 @@ AACw4v8CFtI5gMMVrDoAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12198,11 +12196,12 @@ AACw4v8CFtI5gMMVrDoAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="2.-Phase-1:-Questions">2. Phase 1: Questions<a class="anchor-link" href="#2.-Phase-1:-Questions">&#194;&#182;</a></h1><p>The main question is <strong>what does the survivors have in common?</strong> Was there a pattern between the survivors, such as the wealth, age or sex? Based on the dataset, what can be deduced about the reasons the passengers survived?</p>
+<h1 id="2.-Phase-1:-Questions">2. Phase 1: Questions<a class="anchor-link" href="#2.-Phase-1:-Questions">&#182;</a></h1><p>The main question is <strong>what does the survivors have in common?</strong> Was there a pattern between the survivors, such as the wealth, age or sex? Based on the dataset, what can be deduced about the reasons the passengers survived?</p>
 <p>To answer this question, some intermediate questions will be considered, such as:</p>
 <ul>
 <li><p>What is the rate of survivors by age, gender and class?</p>
@@ -12216,11 +12215,12 @@ AACw4v8CFtI5gMMVrDoAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="3.-Phase-2:-Wrangle">3. Phase 2: Wrangle<a class="anchor-link" href="#3.-Phase-2:-Wrangle">&#194;&#182;</a></h1><p>On this phase it will be conducted several tests to assess the consistensy of the dataset. The following verifications will be performed:</p>
+<h1 id="3.-Phase-2:-Wrangle">3. Phase 2: Wrangle<a class="anchor-link" href="#3.-Phase-2:-Wrangle">&#182;</a></h1><p>On this phase it will be conducted several tests to assess the consistensy of the dataset. The following verifications will be performed:</p>
 <ul>
 <li>The type of data matches with expected for the column?</li>
 <li>The values on the columns matches expected?</li>
@@ -12234,11 +12234,12 @@ AACw4v8CFtI5gMMVrDoAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.1-The-data-type-matches-with-expected-for-the-column?">3.1 The data type matches with expected for the column?<a class="anchor-link" href="#3.1-The-data-type-matches-with-expected-for-the-column?">&#194;&#182;</a></h2>
+<h2 id="3.1-The-data-type-matches-with-expected-for-the-column?">3.1 The data type matches with expected for the column?<a class="anchor-link" href="#3.1-The-data-type-matches-with-expected-for-the-column?">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12259,9 +12260,7 @@ AACw4v8CFtI5gMMVrDoAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
@@ -12307,9 +12306,7 @@ memory usage: 83.6+ KB
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[219]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12387,7 +12384,8 @@ memory usage: 83.6+ KB
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12407,19 +12405,21 @@ memory usage: 83.6+ KB
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.2-The-values-on-the-columns-matches-expected?">3.2 The values on the columns matches expected?<a class="anchor-link" href="#3.2-The-values-on-the-columns-matches-expected?">&#194;&#182;</a></h2>
+<h2 id="3.2-The-values-on-the-columns-matches-expected?">3.2 The values on the columns matches expected?<a class="anchor-link" href="#3.2-The-values-on-the-columns-matches-expected?">&#182;</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.1-PassengerId-consistency">3.2.1 PassengerId consistency<a class="anchor-link" href="#3.2.1-PassengerId-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.1-PassengerId-consistency">3.2.1 PassengerId consistency<a class="anchor-link" href="#3.2.1-PassengerId-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12441,9 +12441,7 @@ memory usage: 83.6+ KB
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[220]:</div>
-
 
 
 
@@ -12457,7 +12455,8 @@ memory usage: 83.6+ KB
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12466,11 +12465,12 @@ memory usage: 83.6+ KB
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.2-Survived-consistency">3.2.2 Survived consistency<a class="anchor-link" href="#3.2.2-Survived-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.2-Survived-consistency">3.2.2 Survived consistency<a class="anchor-link" href="#3.2.2-Survived-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12492,9 +12492,7 @@ memory usage: 83.6+ KB
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[221]:</div>
-
 
 
 
@@ -12508,7 +12506,8 @@ memory usage: 83.6+ KB
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12517,11 +12516,12 @@ memory usage: 83.6+ KB
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.3-Pclass-consistency">3.2.3 Pclass consistency<a class="anchor-link" href="#3.2.3-Pclass-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.3-Pclass-consistency">3.2.3 Pclass consistency<a class="anchor-link" href="#3.2.3-Pclass-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12543,9 +12543,7 @@ memory usage: 83.6+ KB
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[222]:</div>
-
 
 
 
@@ -12559,7 +12557,8 @@ memory usage: 83.6+ KB
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12568,11 +12567,12 @@ memory usage: 83.6+ KB
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.4-Name-consistency">3.2.4 Name consistency<a class="anchor-link" href="#3.2.4-Name-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.4-Name-consistency">3.2.4 Name consistency<a class="anchor-link" href="#3.2.4-Name-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12594,9 +12594,7 @@ memory usage: 83.6+ KB
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[223]:</div>
-
 
 
 
@@ -12610,7 +12608,8 @@ memory usage: 83.6+ KB
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12619,11 +12618,12 @@ memory usage: 83.6+ KB
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.5-Sex-consistency">3.2.5 Sex consistency<a class="anchor-link" href="#3.2.5-Sex-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.5-Sex-consistency">3.2.5 Sex consistency<a class="anchor-link" href="#3.2.5-Sex-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12645,9 +12645,7 @@ memory usage: 83.6+ KB
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[224]:</div>
-
 
 
 
@@ -12661,7 +12659,8 @@ memory usage: 83.6+ KB
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12670,11 +12669,12 @@ memory usage: 83.6+ KB
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.6-Age-consistency">3.2.6 Age consistency<a class="anchor-link" href="#3.2.6-Age-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.6-Age-consistency">3.2.6 Age consistency<a class="anchor-link" href="#3.2.6-Age-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12696,9 +12696,7 @@ memory usage: 83.6+ KB
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[225]:</div>
-
 
 
 
@@ -12720,7 +12718,8 @@ Name: Age, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12729,11 +12728,12 @@ Name: Age, dtype: float64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.7-SibSp-consistency">3.2.7 SibSp consistency<a class="anchor-link" href="#3.2.7-SibSp-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.7-SibSp-consistency">3.2.7 SibSp consistency<a class="anchor-link" href="#3.2.7-SibSp-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12755,9 +12755,7 @@ Name: Age, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[226]:</div>
-
 
 
 
@@ -12771,7 +12769,8 @@ Name: Age, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12798,9 +12797,7 @@ Name: Age, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[227]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12953,7 +12950,8 @@ Name: Age, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12962,11 +12960,12 @@ Name: Age, dtype: float64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.8-Parch-consistency">3.2.8 Parch consistency<a class="anchor-link" href="#3.2.8-Parch-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.8-Parch-consistency">3.2.8 Parch consistency<a class="anchor-link" href="#3.2.8-Parch-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12988,9 +12987,7 @@ Name: Age, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[228]:</div>
-
 
 
 
@@ -13004,7 +13001,8 @@ Name: Age, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13013,11 +13011,12 @@ Name: Age, dtype: float64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.9-Ticket-consistency">3.2.9 Ticket consistency<a class="anchor-link" href="#3.2.9-Ticket-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.9-Ticket-consistency">3.2.9 Ticket consistency<a class="anchor-link" href="#3.2.9-Ticket-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13039,9 +13038,7 @@ Name: Age, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[229]:</div>
-
 
 
 
@@ -13055,7 +13052,8 @@ Name: Age, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13082,9 +13080,7 @@ Name: Age, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[230]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13237,7 +13233,8 @@ Name: Age, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13246,11 +13243,12 @@ Name: Age, dtype: float64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.10-Fare-consistency">3.2.10 Fare consistency<a class="anchor-link" href="#3.2.10-Fare-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.10-Fare-consistency">3.2.10 Fare consistency<a class="anchor-link" href="#3.2.10-Fare-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13272,9 +13270,7 @@ Name: Age, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[231]:</div>
-
 
 
 
@@ -13296,7 +13292,8 @@ Name: Fare, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13324,9 +13321,7 @@ Name: Fare, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[232]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13419,7 +13414,8 @@ Name: Fare, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13446,9 +13442,7 @@ Name: Fare, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[233]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13721,7 +13715,8 @@ Name: Fare, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13730,20 +13725,22 @@ Name: Fare, dtype: float64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.11-Cabin-consistency">3.2.11 Cabin consistency<a class="anchor-link" href="#3.2.11-Cabin-consistency">&#194;&#182;</a></h3><p>We've already checked that this column has 77% of NaN registries, so it will not be considered in our study.</p>
+<h3 id="3.2.11-Cabin-consistency">3.2.11 Cabin consistency<a class="anchor-link" href="#3.2.11-Cabin-consistency">&#182;</a></h3><p>We've already checked that this column has 77% of NaN registries, so it will not be considered in our study.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.12-Embarked-consistency">3.2.12 Embarked consistency<a class="anchor-link" href="#3.2.12-Embarked-consistency">&#194;&#182;</a></h3>
+<h3 id="3.2.12-Embarked-consistency">3.2.12 Embarked consistency<a class="anchor-link" href="#3.2.12-Embarked-consistency">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13765,9 +13762,7 @@ Name: Fare, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[234]:</div>
-
 
 
 
@@ -13799,9 +13794,7 @@ Name: Fare, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[235]:</div>
-
 
 
 
@@ -13815,7 +13808,8 @@ Name: Fare, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13824,19 +13818,21 @@ Name: Fare, dtype: float64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.3-Data-preparation">3.3 Data preparation<a class="anchor-link" href="#3.3-Data-preparation">&#194;&#182;</a></h2>
+<h2 id="3.3-Data-preparation">3.3 Data preparation<a class="anchor-link" href="#3.3-Data-preparation">&#182;</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.3.1-Creation-of-the-column-is_alone">3.3.1 Creation of the column is_alone<a class="anchor-link" href="#3.3.1-Creation-of-the-column-is_alone">&#194;&#182;</a></h3>
+<h3 id="3.3.1-Creation-of-the-column-is_alone">3.3.1 Creation of the column is_alone<a class="anchor-link" href="#3.3.1-Creation-of-the-column-is_alone">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13874,7 +13870,8 @@ Name: Fare, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13910,9 +13907,7 @@ Name: Fare, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>ok for alones
@@ -13926,15 +13921,17 @@ New number of columns is:  13
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.3.2-Creation-of-the-columns-latitude-and-longitude">3.3.2 Creation of the columns latitude and longitude<a class="anchor-link" href="#3.3.2-Creation-of-the-columns-latitude-and-longitude">&#194;&#182;</a></h3>
+<h3 id="3.3.2-Creation-of-the-columns-latitude-and-longitude">3.3.2 Creation of the columns latitude and longitude<a class="anchor-link" href="#3.3.2-Creation-of-the-columns-latitude-and-longitude">&#182;</a></h3>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13967,16 +13964,18 @@ New number of columns is:  13
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="4.-Phase-3:-Explore">4. Phase 3: Explore<a class="anchor-link" href="#4.-Phase-3:-Explore">&#194;&#182;</a></h1><p>On this phase it will be conducted some exploration on the data to find some insights about the correlation with the passengers information and the result of surviving or not the accident. This phase aims to build some intuition and find patterns.</p>
+<h1 id="4.-Phase-3:-Explore">4. Phase 3: Explore<a class="anchor-link" href="#4.-Phase-3:-Explore">&#182;</a></h1><p>On this phase it will be conducted some exploration on the data to find some insights about the correlation with the passengers information and the result of surviving or not the accident. This phase aims to build some intuition and find patterns.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14003,9 +14002,7 @@ New number of columns is:  13
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[239]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -14146,7 +14143,8 @@ New number of columns is:  13
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14173,9 +14171,7 @@ New number of columns is:  13
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[240]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -14289,7 +14285,8 @@ New number of columns is:  13
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14305,11 +14302,12 @@ New number of columns is:  13
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-distribution-of-ages-on-the-ship:">The distribution of ages on the ship:<a class="anchor-link" href="#The-distribution-of-ages-on-the-ship:">&#194;&#182;</a></h3>
+<h3 id="The-distribution-of-ages-on-the-ship:">The distribution of ages on the ship:<a class="anchor-link" href="#The-distribution-of-ages-on-the-ship:">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14336,9 +14334,7 @@ New number of columns is:  13
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>mode:  0    24.0
@@ -14348,9 +14344,7 @@ dtype: float64
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -14570,7 +14564,8 @@ AAAAAElFTkSuQmCC
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14601,9 +14596,7 @@ AAAAAElFTkSuQmCC
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[242]:</div>
-
 
 
 
@@ -14614,9 +14607,7 @@ AAAAAElFTkSuQmCC
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -14886,7 +14877,8 @@ AAAAAElFTkSuQmCC
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14895,11 +14887,12 @@ AAAAAElFTkSuQmCC
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-distribution-of-the-class-on-the-ship:">The distribution of the class on the ship:<a class="anchor-link" href="#The-distribution-of-the-class-on-the-ship:">&#194;&#182;</a></h3>
+<h3 id="The-distribution-of-the-class-on-the-ship:">The distribution of the class on the ship:<a class="anchor-link" href="#The-distribution-of-the-class-on-the-ship:">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14924,9 +14917,7 @@ AAAAAElFTkSuQmCC
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[243]:</div>
-
 
 
 
@@ -14937,9 +14928,7 @@ AAAAAElFTkSuQmCC
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -15179,9 +15168,7 @@ U3edGlXtXzEAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[244]:</div>
-
 
 
 
@@ -15199,7 +15186,8 @@ Name: PassengerId, dtype: int64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15209,11 +15197,12 @@ Name: PassengerId, dtype: int64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-distribution-of-the-gender-on-the-ship:">The distribution of the gender on the ship:<a class="anchor-link" href="#The-distribution-of-the-gender-on-the-ship:">&#194;&#182;</a></h3>
+<h3 id="The-distribution-of-the-gender-on-the-ship:">The distribution of the gender on the ship:<a class="anchor-link" href="#The-distribution-of-the-gender-on-the-ship:">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15246,9 +15235,7 @@ Name: PassengerId, dtype: int64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[245]:</div>
-
 
 
 
@@ -15259,9 +15246,7 @@ Name: PassengerId, dtype: int64</pre>
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -15478,9 +15463,7 @@ af0/tAf6vR4Hqt4AAAAASUVORK5CYII=
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -15722,9 +15705,7 @@ VAAAgLEoKgAAwFgUFQAAYCyKCgAAMBZFBQAAGOv/AW+M2HL5SIIHAAAAAElFTkSuQmCC
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[246]:</div>
-
 
 
 
@@ -15759,9 +15740,7 @@ Name: PassengerId, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[247]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -15832,9 +15811,7 @@ Name: PassengerId, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[248]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -15892,7 +15869,8 @@ Name: PassengerId, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15902,11 +15880,12 @@ Name: PassengerId, dtype: float64</pre>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-distribution-of-the-families-on-the-ship:">The distribution of the families on the ship:<a class="anchor-link" href="#The-distribution-of-the-families-on-the-ship:">&#194;&#182;</a></h3>
+<h3 id="The-distribution-of-the-families-on-the-ship:">The distribution of the families on the ship:<a class="anchor-link" href="#The-distribution-of-the-families-on-the-ship:">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15931,9 +15910,7 @@ Name: PassengerId, dtype: float64</pre>
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[249]:</div>
-
 
 
 
@@ -15944,9 +15921,7 @@ Name: PassengerId, dtype: float64</pre>
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -16209,9 +16184,7 @@ rkJggg==
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[250]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -16274,7 +16247,8 @@ rkJggg==
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -16283,11 +16257,12 @@ rkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-distribution-of-the-embarked-ports-on-the-ship:">The distribution of the embarked ports on the ship:<a class="anchor-link" href="#The-distribution-of-the-embarked-ports-on-the-ship:">&#194;&#182;</a></h3>
+<h3 id="The-distribution-of-the-embarked-ports-on-the-ship:">The distribution of the embarked ports on the ship:<a class="anchor-link" href="#The-distribution-of-the-embarked-ports-on-the-ship:">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -16320,9 +16295,7 @@ rkJggg==
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[251]:</div>
-
 
 
 
@@ -16333,9 +16306,7 @@ rkJggg==
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -16593,9 +16564,7 @@ RU5ErkJggg==
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -16882,9 +16851,7 @@ f0rXgPRDDUneAAAAAElFTkSuQmCC
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[252]:</div>
-
 
 
 
@@ -16895,9 +16862,7 @@ f0rXgPRDDUneAAAAAElFTkSuQmCC
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -17136,7 +17101,8 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17146,11 +17112,12 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="5.-Phase-4:-Conclusions">5. Phase 4: Conclusions<a class="anchor-link" href="#5.-Phase-4:-Conclusions">&#194;&#182;</a></h1><p>By the data explored on phase 3, the most significant unexpected results were:</p>
+<h1 id="5.-Phase-4:-Conclusions">5. Phase 4: Conclusions<a class="anchor-link" href="#5.-Phase-4:-Conclusions">&#182;</a></h1><p>By the data explored on phase 3, the most significant unexpected results were:</p>
 <ul>
 <li>Femlaes seems to survive more than males</li>
 <li>Higher classes seems to survive more than lower</li>
@@ -17173,33 +17140,36 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Analysis-Limitations">Analysis Limitations<a class="anchor-link" href="#Analysis-Limitations">&#194;&#182;</a></h3><p>There are some limitations on the present study. The following conclusions are based on a set of the entire Titanic crew and tripulation (891 of 2,224). Therefore, it could be that the results that this dataset presents does not represent the entire Titanic population. Further on, on section 3 we detected that there were approximately 77% of missing values of cabin information and about 20% of Ages missing values. The lack of information could lead us to incorrect conclusions and it's a situation that should be pointed out.</p>
+<h3 id="Analysis-Limitations">Analysis Limitations<a class="anchor-link" href="#Analysis-Limitations">&#182;</a></h3><p>There are some limitations on the present study. The following conclusions are based on a set of the entire Titanic crew and tripulation (891 of 2,224). Therefore, it could be that the results that this dataset presents does not represent the entire Titanic population. Further on, on section 3 we detected that there were approximately 77% of missing values of cabin information and about 20% of Ages missing values. The lack of information could lead us to incorrect conclusions and it's a situation that should be pointed out.</p>
 <p>Lastly, lurking variables (hidden variables) could be affecting the survival results. For example, the health or strength of the passengers or the local on the ship they were when the accident happened could had affected the survival result, but these informations are not available to evaluate.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.1-Chi-squared-test-for-independence-between-survivors-and-gender">5.1 Chi-squared test for independence between survivors and gender<a class="anchor-link" href="#5.1-Chi-squared-test-for-independence-between-survivors-and-gender">&#194;&#182;</a></h2>
+<h2 id="5.1-Chi-squared-test-for-independence-between-survivors-and-gender">5.1 Chi-squared test for independence between survivors and gender<a class="anchor-link" href="#5.1-Chi-squared-test-for-independence-between-survivors-and-gender">&#182;</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Variables">Variables<a class="anchor-link" href="#Variables">&#194;&#182;</a></h3><ul>
+<h3 id="Variables">Variables<a class="anchor-link" href="#Variables">&#182;</a></h3><ul>
 <li>The dependent variable is if the passenger had survived or not</li>
 <li>The independent variable is the gender of the passenger</li>
 </ul>
-<h3 id="Hypothesis">Hypothesis<a class="anchor-link" href="#Hypothesis">&#194;&#182;</a></h3><ul>
+<h3 id="Hypothesis">Hypothesis<a class="anchor-link" href="#Hypothesis">&#182;</a></h3><ul>
 <li>$H_0$: Gender and survival rates are independent</li>
 <li>$H_a$: Females were prioritized to survive the accident</li>
 </ul>
@@ -17207,7 +17177,8 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17249,9 +17220,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[254]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -17308,7 +17277,8 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17375,9 +17345,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>263.050574071
@@ -17389,7 +17357,8 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17421,9 +17390,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>3.84145882069
@@ -17454,9 +17421,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>0.0
@@ -17468,33 +17433,36 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Step 4: Conclusion</strong></p>
-<p>The $\chi^2$ statistic is higher than the $\chi^2$ critical value for an $\alpha$ level of $0.05$ ($263.05 &gt; 3.84$). This means that the probability of get the $\chi^2$ is less than $5$%, actually it is less than $0.0001$. Because of this, the statistical decision is to <strong>reject the null hypothesis</strong>, meaning that gender and survival rates are not independent of each other and the chances of surviving the accident was related with gender (females had more chance of surviving).</p>
+<p>The $\chi^2$ statistic is higher than the $\chi^2$ critical value for an $\alpha$ level of $0.05$ ($263.05 > 3.84$). This means that the probability of get the $\chi^2$ is less than $5$%, actually it is less than $0.0001$. Because of this, the statistical decision is to <strong>reject the null hypothesis</strong>, meaning that gender and survival rates are not independent of each other and the chances of surviving the accident was related with gender (females had more chance of surviving).</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.2-Chi-squared-test-for-independence-between-survivors-and-class-(Pclass)">5.2 Chi-squared test for independence between survivors and class (Pclass)<a class="anchor-link" href="#5.2-Chi-squared-test-for-independence-between-survivors-and-class-(Pclass)">&#194;&#182;</a></h2>
+<h2 id="5.2-Chi-squared-test-for-independence-between-survivors-and-class-(Pclass)">5.2 Chi-squared test for independence between survivors and class (Pclass)<a class="anchor-link" href="#5.2-Chi-squared-test-for-independence-between-survivors-and-class-(Pclass)">&#182;</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Variables">Variables<a class="anchor-link" href="#Variables">&#194;&#182;</a></h3><ul>
+<h3 id="Variables">Variables<a class="anchor-link" href="#Variables">&#182;</a></h3><ul>
 <li>The dependent variable is if the passenger had survived or not</li>
 <li>The independent variable is the class the passenger was</li>
 </ul>
-<h3 id="Hypothesis">Hypothesis<a class="anchor-link" href="#Hypothesis">&#194;&#182;</a></h3><ul>
+<h3 id="Hypothesis">Hypothesis<a class="anchor-link" href="#Hypothesis">&#182;</a></h3><ul>
 <li>$H_0$: Class and survival rates are independent</li>
 <li>$H_a$: Higher classes were prioritized to survive the accident</li>
 </ul>
@@ -17502,7 +17470,8 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17544,9 +17513,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[260]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -17607,7 +17574,8 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17635,9 +17603,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>102.888988757
@@ -17649,7 +17615,8 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17679,9 +17646,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>5.99146454711
@@ -17712,9 +17677,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>0.0
@@ -17726,33 +17689,36 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Step 4: Conclusion</strong></p>
-<p>The $\chi^2$ statistic is higher than the $\chi^2$ critical value for an $\alpha$ level of $0.05$ ($102.89 &gt; 5.99$). This means that the probability of get the $\chi^2$ is less than $5$%, actually it is less than $0.0001$. Because of this, the statistical decision is to <strong>reject the null hypothesis</strong>, meaning that class and survival rates are not independent of each other and the chances of surviving the accident was related with class (higher classes had more chance of surviving).</p>
+<p>The $\chi^2$ statistic is higher than the $\chi^2$ critical value for an $\alpha$ level of $0.05$ ($102.89 > 5.99$). This means that the probability of get the $\chi^2$ is less than $5$%, actually it is less than $0.0001$. Because of this, the statistical decision is to <strong>reject the null hypothesis</strong>, meaning that class and survival rates are not independent of each other and the chances of surviving the accident was related with class (higher classes had more chance of surviving).</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.3-Chi-squared-test-for-independence-between-survivors-and-loners-(is_alone)">5.3 Chi-squared test for independence between survivors and loners (is_alone)<a class="anchor-link" href="#5.3-Chi-squared-test-for-independence-between-survivors-and-loners-(is_alone)">&#194;&#182;</a></h2>
+<h2 id="5.3-Chi-squared-test-for-independence-between-survivors-and-loners-(is_alone)">5.3 Chi-squared test for independence between survivors and loners (is_alone)<a class="anchor-link" href="#5.3-Chi-squared-test-for-independence-between-survivors-and-loners-(is_alone)">&#182;</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Variables">Variables<a class="anchor-link" href="#Variables">&#194;&#182;</a></h3><ul>
+<h3 id="Variables">Variables<a class="anchor-link" href="#Variables">&#182;</a></h3><ul>
 <li>The dependent variable is if the passenger had survived or not</li>
 <li>The independent variable is alone or with relatives</li>
 </ul>
-<h3 id="Hypothesis">Hypothesis<a class="anchor-link" href="#Hypothesis">&#194;&#182;</a></h3><ul>
+<h3 id="Hypothesis">Hypothesis<a class="anchor-link" href="#Hypothesis">&#182;</a></h3><ul>
 <li>$H_0$: passengers with relatives and survival rates are independent</li>
 <li>$H_a$: passengers with relatives were prioritized to survive the accident</li>
 </ul>
@@ -17760,7 +17726,8 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17802,9 +17769,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[265]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -17861,7 +17826,8 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17889,9 +17855,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>36.8501308475
@@ -17903,7 +17867,8 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17933,9 +17898,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>3.84145882069
@@ -17966,9 +17929,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>1.27567523212e-09
@@ -17980,25 +17941,28 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Step 4: Conclusion</strong></p>
-<p>The $\chi^2$ statistic is higher than the $\chi^2$ critical value for an $\alpha$ level of $0.05$ ($36.85 &gt; 3.84$). This means that the probability of get the $\chi^2$ is less than $5$%, actually it is less than $0.0001$. Because of this, the statistical decision is to <strong>reject the null hypothesis</strong>, meaning that passengers with relatives and survival rates are not independent of each other and the chances of surviving the accident was related with passengers with relatives (passengers with relatives had more chance of surviving).</p>
+<p>The $\chi^2$ statistic is higher than the $\chi^2$ critical value for an $\alpha$ level of $0.05$ ($36.85 > 3.84$). This means that the probability of get the $\chi^2$ is less than $5$%, actually it is less than $0.0001$. Because of this, the statistical decision is to <strong>reject the null hypothesis</strong>, meaning that passengers with relatives and survival rates are not independent of each other and the chances of surviving the accident was related with passengers with relatives (passengers with relatives had more chance of surviving).</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="6.-Phase-5:-Communicate">6. Phase 5: Communicate<a class="anchor-link" href="#6.-Phase-5:-Communicate">&#194;&#182;</a></h1>
+<h1 id="6.-Phase-5:-Communicate">6. Phase 5: Communicate<a class="anchor-link" href="#6.-Phase-5:-Communicate">&#182;</a></h1>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -18028,9 +17992,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[269]:</div>
-
 
 
 
@@ -18041,9 +18003,7 @@ AACALVBaAACALVBaAACALVBaAACALfx/4YU2hHXlW5YAAAAASUVORK5CYII=
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -18360,7 +18320,8 @@ JAQAQEIAACQEAEBCAAAkBABAQgAAJAQAQEIAACQEAEA14kGHk8j0l/0AAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -18370,12 +18331,13 @@ JAQAQEIAACQEAEBCAAAkBABAQgAAJAQAQEIAACQEAEA14kGHk8j0l/0AAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Based on our data set, they had choosen females, wealthiers and families. Here some facts about the accident that support this statement:</p>
-<h3 id="Almost-$75$%-of-the-females-on-board-were-saved,-while-males-represents-only-$19$%.-"><em>Almost $75$% of the females on board were saved, while males represents only $19$%. </em><a class="anchor-link" href="#Almost-$75$%-of-the-females-on-board-were-saved,-while-males-represents-only-$19$%.-">&#194;&#182;</a></h3>
+<h3 id="Almost-$75$%-of-the-females-on-board-were-saved,-while-males-represents-only-$19$%.-"><em>Almost $75$% of the females on board were saved, while males represents only $19$%. </em><a class="anchor-link" href="#Almost-$75$%-of-the-females-on-board-were-saved,-while-males-represents-only-$19$%.-">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -18421,9 +18383,7 @@ JAQAQEIAACQEAEBCAAAkBABAQgAAJAQAQEIAACQEAEA14kGHk8j0l/0AAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[271]:</div>
-
 
 
 
@@ -18434,9 +18394,7 @@ JAQAQEIAACQEAEBCAAAkBABAQgAAJAQAQEIAACQEAEA14kGHk8j0l/0AAAAASUVORK5CYII=
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -18729,9 +18687,7 @@ REREBAYCIiIiAgMBERERgYGAiIiIwEBAREREYCAgIiIiMBAQERERGAiIiIgIDAREREQEBgIiIiIC
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -19036,7 +18992,8 @@ RU5ErkJggg==
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -19045,11 +19002,12 @@ RU5ErkJggg==
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Females-$&gt;$-Males-and-1st-$&gt;$-2nd-$&gt;$-3rd-chance-to-survive"><em>Females $&gt;$ Males and 1st $&gt;$ 2nd $&gt;$ 3rd chance to survive</em><a class="anchor-link" href="#Females-$&gt;$-Males-and-1st-$&gt;$-2nd-$&gt;$-3rd-chance-to-survive">&#194;&#182;</a></h3>
+<h3 id="Females-$&gt;$-Males-and-1st-$&gt;$-2nd-$&gt;$-3rd-chance-to-survive"><em>Females $&gt;$ Males and 1st $&gt;$ 2nd $&gt;$ 3rd chance to survive</em><a class="anchor-link" href="#Females-$&gt;$-Males-and-1st-$&gt;$-2nd-$&gt;$-3rd-chance-to-survive">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -19077,9 +19035,7 @@ RU5ErkJggg==
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[272]:</div>
-
 
 
 
@@ -19090,9 +19046,7 @@ RU5ErkJggg==
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -19543,9 +19497,7 @@ wHEoMAAAwHEoMAAAwHEoMAAAwHEoMAAAwHH+HzLIBDsRBg+CAAAAAElFTkSuQmCC
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[274]:</div>
-
 
 
 
@@ -19556,9 +19508,7 @@ wHEoMAAAwHEoMAAAwHEoMAAAwHEoMAAAwHH+HzLIBDsRBg+CAAAAAElFTkSuQmCC
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -19768,9 +19718,7 @@ AAAMRsgBADAYIQcAwGCEHAAAg/0v+uSozgPWWtQAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[275]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -19821,11 +19769,12 @@ AAAMRsgBADAYIQcAwGCEHAAAg/0v+uSozgPWWtQAAAAASUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="$50$%-of-the-passengers-with-relatives-on-board-had-survived-compared-with-$30$%-of-the-passengers-without-relatives">$50$% of the passengers with relatives on board had survived compared with $30$% of the passengers without relatives<a class="anchor-link" href="#$50$%-of-the-passengers-with-relatives-on-board-had-survived-compared-with-$30$%-of-the-passengers-without-relatives">&#194;&#182;</a></h3>
+<h3 id="$50$%-of-the-passengers-with-relatives-on-board-had-survived-compared-with-$30$%-of-the-passengers-without-relatives">$50$% of the passengers with relatives on board had survived compared with $30$% of the passengers without relatives<a class="anchor-link" href="#$50$%-of-the-passengers-with-relatives-on-board-had-survived-compared-with-$30$%-of-the-passengers-without-relatives">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -19850,9 +19799,7 @@ AAAMRsgBADAYIQcAwGCEHAAAg/0v+uSozgPWWtQAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[276]:</div>
-
 
 
 
@@ -19863,9 +19810,7 @@ AAAMRsgBADAYIQcAwGCEHAAAg/0v+uSozgPWWtQAAAAASUVORK5CYII=
 </div>
 
 <div class="output_area">
-
 <div class="prompt"></div>
-
 
 
 
@@ -20380,9 +20325,7 @@ AAAAAElFTkSuQmCC
 
 
 <div class="output_area">
-
 <div class="prompt output_prompt">Out[278]:</div>
-
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -20430,11 +20373,12 @@ AAAAAElFTkSuQmCC
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="References">References<a class="anchor-link" href="#References">&#194;&#182;</a></h1><ul>
+<h1 id="References">References<a class="anchor-link" href="#References">&#182;</a></h1><ul>
 <li><p><a href="https://www.kaggle.com/c/titanic/data">Titanic dataset</a></p>
 </li>
 <li><p><a href="https://en.wikipedia.org/wiki/RMS_Titanic">Titanic wikipedia</a></p>
