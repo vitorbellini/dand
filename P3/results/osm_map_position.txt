@@ -1,0 +1,6 @@
+OSM Map position for the project
+
+https://www.openstreetmap.org/relation/421151#map=10/-15.7744/-47.7974
+
+Brasilia is my hometown and the capital of Brazil. It's is shaped like an airplane, has curious addresses format (like: SQS 311 bloco B, sometimes with names like Street, Avenues and Boulevads) and lots of the brazilians politics runs here. My interest on this area is because it's the place were I grew, so I have a lot of knowledge about this region and could return to the OpenStreetMap project some contribution on Brasilia registries.
+
