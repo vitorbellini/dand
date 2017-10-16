@@ -1,0 +1,1 @@
+This is the project 4 of the Udacity's Data Analyst Nanodegree. It's build upon the Data Analysis with R course and has the main objectives to use R to exploratory data analysis - EDA. In this project we're going to assess brazilian government information about IT contracts and spendings from 2011 to 2016.
