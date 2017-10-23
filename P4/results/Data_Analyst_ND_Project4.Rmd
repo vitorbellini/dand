@@ -34,35 +34,56 @@ DespesasTI <- read_xlsx("DespesasTI.xlsx")
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+#Subset the Data to fewer variables --------------------------------
+DespesasTI.tidy <- DespesasTI[, c("Esfera", "Orgao Superior", 
+                                  "UG", "GND", "Data Emissao Empenho",
+                                  "Sub-elemento Despesa" , "Favorecido",
+                                  "Sigla (novo)", "Mes", "Ano", "Empenhado",
+                                  "Liquidado", "Pago")]
 
-#Subset the Data to fewer variables
-DespesasTI.tidy <- DespesasTI[, c("Esfera", "Orgao Superior", "UG", "GND", "Data Emissao Empenho", "Sub-elemento Despesa" , "Favorecido", "Sigla (novo)", "Mes", "Ano", "Empenhado", "Liquidado", "Pago")]
+#Rename variables --------------------------------
+names(DespesasTI.tidy) <- c("esfera", "orgao.superior", "unidade.gestora",
+                            "gnd", "data.empenho", "subelemento.despesa",
+                            "favorecido", "orgao.superior.sigla", "mes",
+                            "ano", "vlr.empenhado", "vlr.liquidado",
+                            "vlr.pago")
 
-#Rename variables
-names(DespesasTI.tidy) <- c("esfera", "orgao.superior", "unidade.gestora", "gnd", "data.empenho", "subelemento.despesa" , "favorecido", "orgao.superior.sigla", "mes", "ano", "vlr.empenhado", "vlr.liquidado", "vlr.pago")
-
-#Transform data value to data type
+#Transform data value to data type --------------------------------
 DespesasTI.tidy$data.empenho <- as.Date(DespesasTI.tidy$data.empenho, "%d/%m/%Y")
 
-#Exclude 2017 registries since it's an on going year with limited information
+#Exclude 2017 registries since it's an on going year with limited information --------------------------------
 DespesasTI.tidy <- DespesasTI.tidy[DespesasTI.tidy$ano != 2017, ]
 
-#Exclude contracts lower than 8000 to reduce analysis bias (8000 is lower limit to formal contracts)
+#Exclude contracts lower than 8000 to reduce analysis bias (8000 is lower limit to formal contracts) --------------------------------
 DespesasTI.tidy <- DespesasTI.tidy[DespesasTI.tidy$vlr.empenhado >= 8000, ]
 
-#Round values to better plots
+#Round values to better plots --------------------------------
 DespesasTI.tidy$vlr.empenhado <- round(DespesasTI.tidy$vlr.empenhado)
 DespesasTI.tidy$vlr.liquidado <- round(DespesasTI.tidy$vlr.liquidado)
 DespesasTI.tidy$vlr.pago <- round(DespesasTI.tidy$vlr.pago)
 
-#Set month values as ordered factors
+#Set month values as ordered factors --------------------------------
 DespesasTI.tidy$mes <- tolower(DespesasTI.tidy$mes)
-DespesasTI.tidy$mes <- factor(DespesasTI.tidy$mes,levels=c("jan","fev","mar", "abr","mai","jun","jul","ago","set", "out","nov","dez"),ordered=TRUE)
+DespesasTI.tidy$mes <- factor(DespesasTI.tidy$mes, 
+                              levels = c("jan", "fev", "mar", "abr", 
+                                         "mai", "jun", "jul", "ago", 
+                                         "set",  "out", "nov", "dez"), 
+                              ordered = TRUE)
 
-#create variables to the index difference between reserved (vlr.empenhado) and payed (vlr.pago) and delivered (vlr.liquidado) and payed
-DespesasTI.tidy$emp_pgo.index <- round(with(DespesasTI.tidy, ifelse(vlr.empenhado == 0, 0, 1 - ((DespesasTI.tidy$vlr.empenhado - DespesasTI.tidy$vlr.pago) / DespesasTI.tidy$vlr.empenhado))), 2)
+#create variables to the index difference between reserved (vlr.empenhado) and payed (vlr.pago) and delivered (vlr.liquidado) and payed --------------------------------
+DespesasTI.tidy$emp_pgo.index <- round(with(DespesasTI.tidy,
+                                            ifelse(vlr.empenhado == 0, 0,
+                                                   1 -
+                                              ((DespesasTI.tidy$vlr.empenhado - DespesasTI.tidy$vlr.pago) / 
+                                            DespesasTI.tidy$vlr.empenhado))), 
+                                       2)
   
-DespesasTI.tidy$liq_pgo.index <- round(with(DespesasTI.tidy, ifelse(vlr.liquidado == 0, 0, 1 - ((DespesasTI.tidy$vlr.liquidado - DespesasTI.tidy$vlr.pago) / DespesasTI.tidy$vlr.liquidado))), 2)  
+DespesasTI.tidy$liq_pgo.index <- round(with(DespesasTI.tidy,
+                                            ifelse(vlr.liquidado == 0, 0, 
+                                                   1 -
+                                              ((DespesasTI.tidy$vlr.liquidado - DespesasTI.tidy$vlr.pago) / 
+                                            DespesasTI.tidy$vlr.liquidado))),
+                                       2)  
 ```
 
 # Univariate Plots Section
@@ -86,8 +107,10 @@ The dataset contains 15 variables.
 By the summary table, it's shown that there were contracts not payed. Let's see how many contracts weren't payed:
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#number of contracts without any payment
 table(DespesasTI.tidy$vlr.pago == 0)
 
+#percentual of contracts without any payment
 round(table(DespesasTI.tidy$vlr.pago == 0) / nrow(DespesasTI.tidy), 2)
 
 ```
@@ -118,36 +141,51 @@ ggplot(data = DespesasTI.tidy, aes(x = emp_pgo.index)) +
   geom_histogram() +
   scale_y_continuous(labels = comma)
 
+ggplot(data = subset(DespesasTI.tidy, emp_pgo.index != 0 & emp_pgo.index != 1), 
+                     aes(x = emp_pgo.index)) +
+  geom_histogram() +
+  scale_y_continuous(labels = comma)
+
+#find the top 5 percentual payments by reserved (emp_pgo.index)
 head(DespesasTI.tidy %>%
   group_by(emp_pgo.index) %>%
   summarise(n = n(),
             total = nrow(DespesasTI.tidy),
-            percentual = round((n/total)*100,2)) %>%
+            percentual = round((n / total) * 100, 2)) %>%
   arrange(desc(n)), 5)
 ```
 
 These plots shows the index of reserved vs. payed values. Between 2011 and 2016, only 45% of the IT contracts were fully payed. On the other hand, 41% weren't payed at all. 
+
+When filtered the 0 and 1 indexes, we can see that the distribution is negatively skewed, meaning that there are more contracts payments near the planned/saved ammount.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(data = DespesasTI.tidy, aes(x = liq_pgo.index)) +
   geom_histogram() +
   scale_y_continuous(labels = comma)
 
+ggplot(data = subset(DespesasTI.tidy, liq_pgo.index != 0 & liq_pgo.index != 1), 
+                     aes(x = liq_pgo.index)) +
+  geom_histogram() +
+  scale_y_continuous(labels = comma)
+
+#find the top 5 percentual payments by charged (liq_pgo.index)
 head(DespesasTI.tidy %>%
   group_by(liq_pgo.index) %>%
   summarise(n = n(),
             total = nrow(DespesasTI.tidy),
-            percentual = round((n/total)*100,2)) %>%
+            percentual = round((n / total) * 100, 2)) %>%
   arrange(desc(n)), 5)
 ```
 
 The liq_pgo.index shows the index of amount charged by the provider vs. the amount payed by the Government. This difference could be due to incomplete services, penalties, and others. Only 53.1% of the amount charged was fully payed, and 41.3% of the amount charged weren't payed at all. In between are the contracts that had some disconuts on it's payment.
 
+When filtered the 0 and 1 indexes, we can see that the distribution is negatively skewed, meaning that there are more contracts payments near the charged ammount.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(data = DespesasTI.tidy,aes(x = orgao.superior.sigla))+
   geom_bar() +
-  theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
 This bar plot shows the number of IT contracts by Federal Department. Ministry of Education and Ministry of Defense are the Departments with higher contract counts, near 40,000 in 6 years. This bar plot is from years 2011 to 2016. Let's plot the same information wrapped by year to check if there were some significant differences between the years.
@@ -155,7 +193,7 @@ This bar plot shows the number of IT contracts by Federal Department. Ministry o
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(data = DespesasTI.tidy,aes(x = orgao.superior.sigla))+
   geom_bar() +
-  theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5,size=5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 5)) +
   facet_wrap(~ ano)
 ```
 
@@ -165,7 +203,8 @@ The high number of MEC and MD contracts is unusual, since each contract should r
 
 Let's plot a table with management units count by Department to check it out.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, num_ug_by_orgao.superior}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Number of "Management Unit" by Department
 DespesasTI.tidy %>%
   group_by(orgao.superior) %>%
   summarise(total_ug = n_distinct(unidade.gestora)) %>%
@@ -180,30 +219,32 @@ On the next session I will check the correlation of number of management units a
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, subelemento.despesa_plot}
 ggplot(data = DespesasTI.tidy, aes(x = subelemento.despesa)) +
   geom_bar() +
-  theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 
 ggplot(data = DespesasTI.tidy, aes(x = subelemento.despesa)) +
   geom_bar() +
-  theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5,size=5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size= 5)) +
   facet_wrap(~ ano)
 
+#Number of occurrences by item (subelemento.despesa)
 table_subelemento.despesa <- table(DespesasTI.tidy$subelemento.despesa)
-table_subelemento.despesa[order(table_subelemento.despesa, decreasing = T)]
+table_subelemento.despesa[order(table_subelemento.despesa, decreasing = TRUE)]
 ```
 
 The most contracted items are "data processing equipments" and "data processing materials".
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, favorecido_plot}
-#prep the table
+#Number of contracts by Company (favorecido)
 DespesasTI.tidy_favorecido <- DespesasTI.tidy %>%
   group_by(favorecido) %>%
   summarise(n.contracts = n()) %>%
   arrange(desc(n.contracts))
 
-ggplot(data = DespesasTI.tidy_favorecido[1:10,], aes(x = reorder(favorecido, -n.contracts), y = n.contracts)) +
+ggplot(data = DespesasTI.tidy_favorecido[1:10, ], 
+       aes(x = reorder(favorecido, -n.contracts), y = n.contracts)) +
   geom_col() +
-  theme(axis.text.x=element_text(angle=30,hjust=1))
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
 
 DespesasTI.tidy_favorecido[1:10, ]
 ```
@@ -211,9 +252,10 @@ DespesasTI.tidy_favorecido[1:10, ]
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 top_10_count_favorecidos <- DespesasTI.tidy_favorecido$favorecido[1:10]
 
-ggplot(data = subset(DespesasTI.tidy, favorecido %in% top_10_count_favorecidos), aes(x = favorecido)) +
+ggplot(data = subset(DespesasTI.tidy, favorecido %in%
+                       top_10_count_favorecidos), aes(x = favorecido)) +
   geom_bar() +
-  theme(axis.text.x=element_text(angle=30,hjust=1)) +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1)) +
   facet_wrap(~ ano)
 ```
 
@@ -222,9 +264,10 @@ Hewlett-Packard had twice more IT contracts than the second place, Serpro betwee
 When plotted by year, it's unusual the number of contracts by Hewlett-Packard on 2013. 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(data = subset(DespesasTI.tidy, favorecido == "HEWLETT-PACKARD"), aes(x = orgao.superior.sigla)) +
+ggplot(data = subset(DespesasTI.tidy, favorecido == "HEWLETT-PACKARD"), 
+       aes(x = orgao.superior.sigla)) +
   geom_bar() +
-  theme(axis.text.x=element_text(angle=90,hjust=1,size=5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 5)) +
   facet_wrap(~ ano)
 ```
 
@@ -233,8 +276,10 @@ Investigating a little more, MEC is the Department with higher Hewlett-Packard n
 Let's see the number of MEC contracts with Hewlett-Packard on 2013 by Management Unit:
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, MEC_num_contract_by_ug}
+#Number of contracts by "Management Unit" of Ministry of Education (MEC)
 head(DespesasTI.tidy %>%
-  filter(orgao.superior.sigla == "MEC" & ano == 2013 & favorecido == "HEWLETT-PACKARD") %>%
+  filter(orgao.superior.sigla == "MEC" & ano == 2013 & 
+           favorecido == "HEWLETT-PACKARD") %>%
   group_by(unidade.gestora) %>%
   summarise(total_contrato = n()) %>%
   arrange(desc(total_contrato)))
@@ -243,16 +288,25 @@ head(DespesasTI.tidy %>%
 So 2013 MEC Hewlett-Packard higher contracts count were with Federal Universities, with "Universidade Federal do Rio Grande do Norte" on top. This University has 5 unities on 5 different cities. (font: [ufrn](http://www.ufrn.br/institucional/campi))
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(data = DespesasTI.tidy[with(DespesasTI.tidy, orgao.superior.sigla == "MEC" & ano == 2013 & favorecido == "HEWLETT-PACKARD"), ], aes(x = vlr.pago)) +
+ggplot(data = DespesasTI.tidy[with(DespesasTI.tidy, 
+                                   orgao.superior.sigla == "MEC" & ano == 2013
+                                   & favorecido == "HEWLETT-PACKARD"), ],
+       aes(x = vlr.pago)) +
   geom_histogram()
 ```
 
 Plotting the values paid to Hewlett-Packard on 2013 by MEC we can see that a lot of contracts weren't payed (with value 0).
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-table(DespesasTI.tidy[with(DespesasTI.tidy, orgao.superior.sigla == "MEC" & ano == 2013 & favorecido == "HEWLETT-PACKARD"), ]$vlr.pago < 1)
+#Table the contracts that didn't have any payment (< 1)
+table(DespesasTI.tidy[with(DespesasTI.tidy, orgao.superior.sigla == "MEC"
+                           & ano == 2013 & favorecido == "HEWLETT-PACKARD"),]
+      $vlr.pago < 1)
 
-summary(DespesasTI.tidy[with(DespesasTI.tidy, orgao.superior.sigla == "MEC" & ano == 2013 & favorecido == "HEWLETT-PACKARD" & vlr.pago > 1), ]$vlr.pago)
+#Summary of MEC contracts that had any payment
+summary(DespesasTI.tidy[with(DespesasTI.tidy, orgao.superior.sigla == "MEC"
+                             & ano == 2013 & favorecido == "HEWLETT-PACKARD" &
+                               vlr.pago > 1), ]$vlr.pago)
 ```
 
 Of 928 total, 567 weren't payed vs. 361 that were, at least partial. The median is 25,500 and 75% of the distribution is below 52,615. This low values contracts suggest the purchase of simple products, like a desktop or printer material.
@@ -260,7 +314,7 @@ Of 928 total, 567 weren't payed vs. 361 that were, at least partial. The median 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(data = DespesasTI.tidy, aes(x = mes)) +
   geom_bar() +
-  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   facet_wrap(~ ano)
 ```
 
@@ -320,13 +374,14 @@ I had performed serveral ajusts on the original dataset to better understand the
 # Bivariate Plots Section
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Values of contracts by year
 DespesasTI.tidy_valores <- DespesasTI.tidy %>%
-  group_by(ano) %>%
-  summarise(total_vlr.empenhado = sum(vlr.empenhado),
-            total_vlr.liquidado = sum(vlr.liquidado),
-            total_vlr.pago = sum(vlr.pago),
-            diff.emp_pgo = total_vlr.empenhado - total_vlr.pago,
-            perc.emp_pgo = diff.emp_pgo / total_vlr.empenhado) %>%
+  group_by(ano) %>% 
+  summarise(total_vlr.empenhado = sum(vlr.empenhado), #total of value reserved
+            total_vlr.liquidado = sum(vlr.liquidado), #total of value charged
+            total_vlr.pago = sum(vlr.pago), #total of value payed
+            diff.emp_pgo = total_vlr.empenhado - total_vlr.pago, #difference between reserved and payed
+            perc.emp_pgo = diff.emp_pgo / total_vlr.empenhado) %>% #percentual of payed compared to reserved
   arrange(ano)
 
 DespesasTI.tidy_valores
@@ -339,12 +394,12 @@ The mean IT expense of Federal Government is 4.095 Billions of Reais by year, wh
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(aes(x = orgao.superior.sigla, y = vlr.pago), data = DespesasTI.tidy) +
   geom_col() +
-  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   scale_y_continuous(labels = comma)
 
 ggplot(aes(x = orgao.superior.sigla, y = vlr.pago), data = DespesasTI.tidy) +
   geom_col() +
-  theme(axis.text.x=element_text(angle=90,hjust=1,size=5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 5)) +
   facet_wrap(~ ano)
 ```
 
@@ -353,12 +408,12 @@ While on the previous session we discovered that MEC and MD were the departments
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(aes(x = subelemento.despesa, y = vlr.pago), data = DespesasTI.tidy) +
   geom_col() +
-  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   scale_y_continuous(labels = comma)
 
 ggplot(aes(x = subelemento.despesa, y = vlr.pago), data = DespesasTI.tidy) +
   geom_col() +
-  theme(axis.text.x=element_text(angle=90,hjust=1,size=5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 5)) +
   scale_y_continuous(labels = comma) +
   facet_wrap(~ ano)
 ```
@@ -366,15 +421,18 @@ ggplot(aes(x = subelemento.despesa, y = vlr.pago), data = DespesasTI.tidy) +
 By the item contracted, between the years 2011-2014, the higher spent was "services for data processing", but on the years 2015 and 2016 it seems that this item started to share it's budget with "support to IT infrastructure". This could be due to investments on on-premises data centers or cloud IaaS.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#total of value payed by Company
 favorecidos_payed <- DespesasTI.tidy %>%
   group_by(favorecido) %>%
   summarise(total_pago = sum(vlr.pago),
             n = n()) %>%
   arrange(desc(total_pago))
 
-ggplot(aes(x = favorecido, y = vlr.pago), data = subset(DespesasTI.tidy, favorecido %in% favorecidos_payed$favorecido[1:10]) ) +
+ggplot(aes(x = favorecido, y = vlr.pago), 
+       data = subset(DespesasTI.tidy, favorecido %in% #plot only the top 10 sellers
+                       favorecidos_payed$favorecido[1:10])) +
   geom_col() +
-  theme(axis.text.x=element_text(angle=90,hjust=1,size=5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 5)) +
   scale_y_continuous(labels = comma)
 ```
 
@@ -384,7 +442,7 @@ The two companies that invoiced the most were Serpro and Dataprev. These two com
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(aes(x = mes, y = vlr.pago), data = DespesasTI.tidy) +
   geom_col() +
-  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   facet_wrap(~ ano) +
   scale_y_continuous(labels = comma)
 ```
@@ -395,7 +453,7 @@ It doesn't seems to have a pattern on month spent. The unusual is the month of D
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(aes(x = mes, y = vlr.empenhado), data = DespesasTI.tidy) +
   geom_col() +
-  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   facet_wrap(~ ano)
 ```
 
@@ -405,48 +463,81 @@ The reserved money to the contract plot is similar to the spent money plot. Whic
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(aes(x = orgao.superior.sigla, y = vlr.pago), data = DespesasTI.tidy) +
   geom_boxplot() +
-  theme(axis.text.x=element_text(angle=90,hjust=1))
-
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ggplot(aes(x = orgao.superior.sigla, y = vlr.pago), data = DespesasTI.tidy) +
   geom_boxplot() +
-  theme(axis.text.x=element_text(angle=90,hjust=1)) +
-  ylim(7500, 100000)
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  coord_cartesian(ylim = c(0, 600000))
+
+#Summary value payed by Department
+DespesasTI.tidy %>%
+  group_by(orgao.superior.sigla) %>%
+  summarise(min = min(vlr.pago),
+            first_q = quantile(vlr.pago, 0.25),
+            median = median(vlr.pago),
+            mean = mean(vlr.pago),
+            thir_q = quantile(vlr.pago, 0.75),
+            max = max(vlr.pago)) %>%
+  arrange(desc(median))
 ```
 
-This boxplot shows that there are a lot of outilers on contracts values. Ministry of External Relations - MRE is the one with lower interquartile range and lowest median. Ministry of Sports - ME has the highest median.
+This boxplot shows that there are a lot of outilers on contracts values. Ministry of External Relations - MRE is the one with lower interquartile range. Ministry of Turism - MTur has the highest median. AGU, MAPA and MEC has zero for median, indicating a high count on contracts without payments.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(aes(x = subelemento.despesa, y = vlr.pago), data = DespesasTI.tidy) +
   geom_boxplot() +
-  theme(axis.text.x=element_text(angle=90,hjust=1)) +
-  ylim(7500, 100000)
+  theme(axis.text.x = element_text(angle = 30, hjust = 1)) +
+  coord_cartesian(ylim = c(0, 600000))
+
+#Summary value payed by item
+DespesasTI.tidy %>%
+  group_by(subelemento.despesa) %>%
+  summarise(min = min(vlr.pago),
+            first_q = quantile(vlr.pago, 0.25),
+            median = median(vlr.pago),
+            mean = mean(vlr.pago),
+            thir_q = quantile(vlr.pago, 0.75),
+            max = max(vlr.pago)) %>%
+  arrange(desc(median))
+
 ```
 
-By item, roughly the interquartile range is between 10,000 and 70,000, with "upgrade data processing hardware" with highest median and "material to data processing" with the lowest.
+By item, "systems hosting" is the highest interquartile range, "IT users support" is the highest median and "IT staff technical services" the lowest.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(aes(x = ano, y = vlr.pago), data = DespesasTI.tidy) +
-  geom_jitter(alpha = 1/25) +
-  ylim(7500, 100000) +
-  scale_x_continuous(breaks = seq(2011, 2016))
+ggplot(aes(x = factor(ano), y = vlr.pago), data = DespesasTI.tidy) +
+  geom_boxplot() +
+  coord_cartesian(ylim = c(0, 50000))
+
+#Summary value payed by year
+DespesasTI.tidy %>%
+  group_by(ano) %>%
+  summarise(min = min(vlr.pago),
+            first_q = quantile(vlr.pago, 0.25),
+            median = median(vlr.pago),
+            mean = mean(vlr.pago),
+            thir_q = quantile(vlr.pago, 0.75),
+            max = max(vlr.pago)) %>%
+  arrange(desc(median))
 ```
 
-The most commont contract spent was under 25,000 by the years.
+While the interquartile range grows across the years, the median does not seems to present a pattern. Lurking variables, like inflation, elections and corruption fight could be affecting this result.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Contracts by Department
 contratos_ug <- DespesasTI.tidy %>%
   group_by(orgao.superior.sigla) %>%
-  summarise(total_contratos = n(),
-            total_ug = n_distinct(unidade.gestora),
-            total_vlr.pago = sum(vlr.pago))
+  summarise(total_contratos = n(), #total of contracts
+            total_ug = n_distinct(unidade.gestora), #number of "Management Units" under a Department
+            total_vlr.pago = sum(vlr.pago)) #total payed by Department
 
 ggplot(aes(x = total_ug, y = total_contratos), data = contratos_ug) +
-  geom_point()
+  geom_point() +
+  stat_smooth(method = "lm")
 ```
 
-This scatter plot show the number of contracts by the number of management unit that a federal department has. It seems that higher unit counts leads to higher contract counts.
-
+This scatter plot show the number of contracts by the number of management unit that a federal department has. It seems that higher unit counts leads to higher contract counts. This could be a room for improvement, the Departments could lead coletive purchases to reduced prices on high amounts.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 with(contratos_ug, cor.test(total_ug, total_contratos))
@@ -457,7 +548,8 @@ The correlation coefficient between number of unit managements and number of con
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(aes(x = total_ug, y = total_vlr.pago), data = contratos_ug) +
-  geom_point()
+  geom_point() +
+  stat_smooth(method = "lm")
 ```
 
 On the other hand, the values of the contracts does not seems to have a high correlation with the number of management units. Since the complexity and IT demand of different Departments are very specific, this seems correct. For example, while Ministry of Education, with several management units, should have high desktop demand, the Treasury should have high data processing demand.
@@ -478,7 +570,7 @@ The expected plot was a straight line, meaning that the amount reserved and paye
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(aes(x = reorder(orgao.superior.sigla, -emp_pgo.index), y = emp_pgo.index), data = DespesasTI.tidy) +
   geom_bar(stat = "summary", fun.y = mean) +
-  theme(axis.text.x=element_text(angle=90,hjust=1))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 The emp_pgo.index variable shows the percentage of the reserved budget that was actually spent. Ministry of External Relations was the most precise planner and Federal Advocacy the worst.
@@ -509,6 +601,7 @@ The number of contracts is positively and strongly correlated with the number of
 # Multivariate Plots Section
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Colapse columns vlr.empenhado, vlr.liquidado and vlr.pago into column tipo.vlr and the values into column vlr
 DespesasTI.tidy_gather <- gather(DespesasTI.tidy, "tipo.vlr" ,"vlr" , 11:13)
 ```
 
@@ -523,31 +616,34 @@ ggplot(aes(x = ano, y = vlr), data = DespesasTI.tidy_gather) +
 The distribution on years 2011 and 2012 is very odd. The gap of reserved and charged to payed is too high and the amount of reserved and charged been virtually the same doesn't make much sense. For 2013 to 2016, the amount charged and payed are similar and the reserved value was very distant of the actually payed.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(aes(x = mes, y = vlr, group = tipo.vlr, color = tipo.vlr), data = DespesasTI.tidy_gather) +
+ggplot(aes(x = mes, y = vlr, group = tipo.vlr, color = tipo.vlr), 
+       data = DespesasTI.tidy_gather) +
   geom_line(stat = "summary", fun.y = sum) +
   scale_y_continuous(labels = comma) +
   scale_color_brewer(type = 'qual') +
   ylab("amount of money") +
   facet_wrap(~ ano) +
-  theme(axis.text.x = element_text(angle=90,hjust=1,vjust=0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(aes(x = mes, y = vlr, fill = tipo.vlr), data = DespesasTI.tidy_gather) +
-  geom_bar(position=position_dodge(), stat = "summary", fun.y = sum) +
+ggplot(aes(x = mes, y = vlr, fill = tipo.vlr), 
+       data = DespesasTI.tidy_gather) +
+  geom_bar(position = position_dodge(), stat = "summary", fun.y = sum) +
   scale_y_continuous(labels = comma) +
   scale_fill_brewer(type = 'qual') +
   ylab("amount of money") +
   facet_wrap(~ ano) +
-  theme(axis.text.x = element_text(angle=90,hjust=1,vjust=0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
 By month and year, the distribution does not seems to have a pattern. The amounts of reserved, charged and payed vary together.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(aes(x = orgao.superior.sigla, y = vlr.pago), data = DespesasTI.tidy, orgao.superior.sigla) +
+ggplot(aes(x = orgao.superior.sigla, y = vlr.pago), 
+       data = DespesasTI.tidy) +
   geom_count() +
-  theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
 MEC and MD are the Department with higher number of contracts, but with low values. MF and MDS has low contract numbers with high values.
@@ -555,50 +651,65 @@ MEC and MD are the Department with higher number of contracts, but with low valu
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(aes(x = orgao.superior.sigla, y = vlr.pago), data = DespesasTI.tidy) +
   geom_bar(aes(fill = subelemento.despesa), stat = "summary", fun.y = sum) +
-  theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5), legend.text = element_text(size = 5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), 
+        legend.text = element_text(size = 5)) +
   scale_y_continuous(labels = comma)
 
 ggplot(aes(x = orgao.superior.sigla, y = vlr.pago), data = DespesasTI.tidy) +
   geom_col(aes(fill = subelemento.despesa)) +
-  theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5,size=5), legend.text = element_text(size = 5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, 
+                                   vjust = 0.5, size = 5),
+        legend.text = element_text(size = 5)) +
   scale_y_continuous(labels = comma) +
   facet_wrap(~ ano)
 ```
 
 This graph shows how the Departments allocate their IT budget. The shift from "data processing services" to "IT infrastructure support" identified on the previous session was made by the Treasury on 2015.
 
-
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(aes(x = favorecido, y = vlr.pago), data = subset(DespesasTI.tidy, favorecido %in% favorecidos_payed$favorecido[1:10])) +
+ggplot(aes(x = favorecido, y = vlr.pago), 
+       data = subset(DespesasTI.tidy, favorecido %in%
+                       favorecidos_payed$favorecido[1:10])) + #select only top 10 favorecidos ammount payed
   geom_col(aes(fill = subelemento.despesa)) +
-  theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5,size=5), legend.text = element_text(size = 5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, 
+                                   vjust = 0.5, size = 5), 
+        legend.text = element_text(size = 5)) +
   scale_y_continuous(labels = comma)
 
-ggplot(aes(x = favorecido, y = vlr.pago), data = subset(DespesasTI.tidy, favorecido %in% favorecidos_payed$favorecido[1:10])) +
+ggplot(aes(x = favorecido, y = vlr.pago), 
+       data = subset(DespesasTI.tidy, favorecido %in%
+                       favorecidos_payed$favorecido[1:10])) + #select only top 10 favorecidos ammount payed
   geom_col(aes(fill = subelemento.despesa)) +
-  theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5, size=5), legend.text = element_text(size = 5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, 
+                                   vjust = 0.5, size = 5), 
+        legend.text = element_text(size = 5)) +
   scale_y_continuous(labels = comma) +
   facet_wrap(~ ano)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-treemap(subset(DespesasTI.tidy, favorecido %in% favorecidos_payed$favorecido[1:10]), index = c("favorecido", "subelemento.despesa"), vSize = "vlr.pago", type = "index",
-        border.col=c("black","white"),
-        border.lwds=c(1,0.5))
+treemap(subset(DespesasTI.tidy, favorecido %in%
+                 favorecidos_payed$favorecido[1:10]), #select only top 10 favorecidos ammount payed
+        index = c("favorecido", "subelemento.despesa"), 
+        vSize = "vlr.pago", type = "index",
+        border.col = c("black", "white"), 
+        border.lwds = c(1, 0.5))
 ```
 
 By the top 10 companies,the two main that offers "data processing services" and "IT infrastructure support" are Serpro and Dataprev. The hypothesis on the previous session that high "IT infrastructure support" could be due to on-premises data centers can be rejected. Serpro is the company that most sold this service and it offers Infrastructure as a Service on the cloud.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-treemap(DespesasTI.tidy, index = c("orgao.superior.sigla", "favorecido"), vSize = "vlr.pago", type = "index",
-        border.col=c("black","white"),
-        border.lwds=c(1,0.5))
+treemap(DespesasTI.tidy, index = c("orgao.superior.sigla", "favorecido"),
+        vSize = "vlr.pago", type = "index",
+        border.col = c("black", "white"),
+        border.lwds = c(1, 0.5))
 ```
 
 Treasury and MDS, the top IT spenders, have big contracts with Serpro and Dataprev. MS, MEC and MD have higher number of providers with lower amount.
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Total payed by year
 Gov_spents <- DespesasTI.tidy %>%
   group_by(ano) %>%
   summarise(vlr.total = sum(vlr.pago)) %>%
@@ -660,20 +771,35 @@ qplot(data = DespesasTI.tidy, x = ifelse(vlr.pago == 0, 0.1, vlr.pago), color = 
 
 ### Description First
 
-The distribution of the contracts spent looks skewed to the left. There's a high concentration on low contracts values (10,000) and a lot of contracts with zero value, that were adapted to appear on the log scale plot.
+The objective of this plot is to identify the values spent by contracts, what were more frequent and how they are distributed.
+
+The distribution of the contracts spent looks skewed to the left. There's a high concentration on low contracts values (10,000) and a lot of contracts with zero value, equivalent a 41% of the dataset, that were adapted to appear on the log scale plot. Contracts without any payment usually occur due to a decision of the Department, even after signing the contract, to not buy the items. It's foreseen on the law, but these high count could lead to bad planning on contracting items not needed or budget cut that disturbed the contract execution.
+
+The gap between 0 and 8,000 is due to a slice made on the original dataset. Public binding in Brazil starts at 8,000 so I discarded the contracts that had lower than 8,000 reserved because of lack of information on what happened on these cases.
 
 ### Plot Two
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Get total spent by Department
+total_spent.department <- DespesasTI.tidy %>%
+  group_by(orgao.superior.sigla) %>%
+  summarise(vlr.total = sum(vlr.pago)) %>%
+  mutate(prop = round(vlr.total / sum(vlr.total) * 100, 2)) %>% #proportion of vlr.total
+  arrange(desc(vlr.total))
+
+#Get total spent by Department by year
 Dept_spent <- DespesasTI.tidy %>%
   group_by(orgao.superior.sigla, ano) %>%
   summarise(vlr.total = sum(vlr.pago))
 
-ggplot(aes(x = reorder(orgao.superior.sigla, -vlr.total), y = vlr.total), data = Dept_spent) +
+ggplot(aes(x = reorder(orgao.superior.sigla, -vlr.total), y = vlr.total),
+       data = subset(Dept_spent, orgao.superior.sigla %in% 
+                       total_spent.department[1:10, ]$orgao.superior.sigla)) +
   geom_col(color = 'black', fill = '#F79420') +
-  theme(axis.text.x=element_text(angle=90,hjust=1,size=7)) +
+  theme(axis.text.x = element_text(angle = 90,hjust = 1, size = 7)) +
   scale_y_continuous(labels = comma) +
-  labs(title = "Amount spent on IT by Deparment", subtitle = "by Year") +
-  theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) +
+  labs(title = "Amount spent on IT by Deparment (top 10)", subtitle = "by Year") +
+  theme(plot.title = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5)) +
   xlab("Federal Department") +
   ylab("Amount spent on IT (BRL)") +
   facet_wrap(~ ano)
@@ -681,19 +807,43 @@ ggplot(aes(x = reorder(orgao.superior.sigla, -vlr.total), y = vlr.total), data =
 
 ### Description Two
 
-Treasury (MF) is the Department with higher IT spent along the years and Ministry of Social Development (MDS) the second. The amount spent by the Treasury is more than twice of the Ministry of Social Development and it has growing through the years.
+The bar plot does a good job comparing categorical vairables, such as Federal Departments spents. In this plot is possible to identify the amounts spent and how they differ from the other Departments.
+
+Treasury (MF) is the Department with higher IT spent along the years 2011 to 2016, and Ministry of Social Development (MDS) the second. Together they represent almost 50% of federal IT expenses, with 35% to Treasury and 13% to MDS.
+
+The amount spent by the Treasury is more than twice of the Ministry of Social Development and it has growing through the years. While the Treasury is responsible to collecting income tax declaration, an exclusive on-line service, the MDS is the Department responsible for social security and retirement.
 
 ### Plot Three
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-treemap(DespesasTI.tidy, index = c("orgao.superior.sigla", "favorecido"), vSize = "vlr.pago", type = "index",
-        border.col=c("black","white"),
-        border.lwds=c(1,0.5),
-        title = "Departments with Suppliers")
+#Get total spent by Supplier
+total_spent.supplier <- DespesasTI.tidy %>%
+  group_by(favorecido) %>%
+  summarise(vlr.total = sum(vlr.pago)) %>%
+  mutate(prop = round(vlr.total / sum(vlr.total) * 100, 2)) %>% #proportion of vlr.total
+  arrange(desc(vlr.total))
+
+#Get total spent by Supplier by Deparment
+total_spent.supplier.department <- DespesasTI.tidy %>%
+  group_by(orgao.superior.sigla, favorecido) %>%
+  summarise(vlr.total = sum(vlr.pago)) %>%
+  mutate(prop = round(vlr.total / sum(vlr.total) * 100, 2)) %>% #proportion of vlr.total
+  arrange(desc(vlr.total))
+
+treemap(DespesasTI.tidy, index = c("orgao.superior.sigla", "favorecido"),
+        vSize = "vlr.pago", type = "index",
+        border.col = c("black", "white"),
+        border.lwds = c(1, 0.5),
+        title = "Departments with Suppliers",
+        align.labels = list(c("left", "top"), c("right", "bottom")))
 ```
 
 ### Description Three
 
-The main IT suppliers of the Federal Government are Serpro and Dataprev, the two brazilian Public IT companies. Serpro is the main supplier of the Treasury and Dataprev of the Ministry of Social Development. MP, MT and MDIC have high Serpro contracts wile MTPS Dataprev. Ministry of Education (MEC) and Ministry of Defense (MD) have high number of suppliers with lower contract values.
+This treemap plot does a great job comparing the amount of IT spent by Department and by Suppliers. It's easy to identify the highest spenders and the distribution of the Suppliers within the Departments.
+
+The main IT suppliers of the Federal Government are Serpro and Dataprev, the two brazilian Public IT companies, an overall of 56% spent, with 39% to Serpro and 17% to Dataprev. Serpro is the main supplier of the Treasury (80% of it's Supplier spent) and Dataprev of the Ministry of Social Development (87% of it's Supplier spent). MP, MT and MDIC have high Serpro contracts wile MTPS Dataprev. Ministry of Education (MEC) and Ministry of Defense (MD) have high number of suppliers with lower contract values. It's even more unusual the Ministry of Cities distribution, almost 93% of it's IT budget is spent with Serpro.
+
+Linking with the plot two, Serpro is the supplier responsible of the income tax declaration system, and Dataprev, the retirement and social security system.
 
 ------
 
@@ -702,6 +852,8 @@ The main IT suppliers of the Federal Government are Serpro and Dataprev, the two
 The Brazil's Federal Government IT spent dataset has information about almost 105,000 public contracts between the years 2011 and 2016. My purpose was to understand how the IT budget was beeing allocated, what are the main players (public and privated) and what kind of services/products are bought. I started exploring the individual variables by using histogram and bar charts and then moved to bi and multi variated analysis by adding the costs of the contracts and combining multiple variables on the plots.
 
 I've found that the Treasury and the Ministry of Social Development are the main IT spenders and that Serpro and Dataprev, public companies, are the main suppliers. The IT budget increased along the years and there is a 36% gap between reserved/planned and spent amounts. The two top contracted items were "data processing services" and "IT infrastructure support". On 2015 the amount spent on "data processing services" decreased, while "IT infrastructure support" increased. It appeared an strategy shift, but it occured within the same supplier, Serpro, indicating more a contractual adjustment then actually a change on the way the service is provided.
+
+The high correlation between number of Management Units and number of contracts could be an opportunity to the Departments conduct coletive purchases aiming standarization, quality and lower prices.
 
 The dataset used for this analysis was provided by SIGA, a Senate system to monitor public spent. It had several contracts with zero and below 8,000 (minimal public bidding) values. Because of that, to reduce biased conclusions, I've decided to discard 355,777 out of 460,0228 registries. It wasn't clear what happened with these cases but certainly this action moved away what really happened from the partial data that I had available to analysis. Also, since IT acquisitions are relatively new and change very quick, it is possible that some contracts weren't precisely classified. Lastly, the inflation wasn't considered on the analysis, but usually it stands around 6% a year in Brazil.
 
@@ -717,3 +869,7 @@ For further works on this subject, I think that efforts on closing the gap betwe
 * [ggplot2 Examples](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
 * [Treemap plot](http://www.r-graph-gallery.com/portfolio/treemap/)
 * [Treemap plot documentation](https://www.rdocumentation.org/packages/treemap/versions/2.4-2/topics/treemap)
+* [Treemap plot labels alignment](https://stackoverflow.com/questions/18128370/how-do-i-change-the-position-of-labels-in-the-r-treemap)
+* [R styleguide](http://adv-r.had.co.nz/Style.html)
+* [Google's R styleguide](http://google.github.io/styleguide/Rguide.xml#linelength)
+
