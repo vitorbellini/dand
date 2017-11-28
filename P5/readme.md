@@ -1,0 +1,1 @@
+This is the project 5 of the Udacity's Data Analyst Nanodegree. It's build upon the Intro to Machine Learning course and has the main objectives to use feature selection, feature scaling, machine learning algorithms and validation and evaluation techniques to identify persons of interest (suited for further investigation) on the Enron scandal.
