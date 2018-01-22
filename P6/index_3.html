@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+    
+    <style>
+      circle.dimple-series-1 {
+        fill: red;
+      }
+
+      h2 {
+        text-align: center;
+      }
+    </style>
+
+    <script type="text/javascript">
+      function draw(data) {
+      
+      /*
+        D3.js setup code
+      */
+
+          "use strict";
+          var margin = 75,
+              width = 1400 - margin,
+              height = 600 - margin;
+
+          d3.select("body")
+            .append("h2")
+            .text("2008 US Flight delay average")
+
+          var svg = d3.select("body")
+            .append("svg")
+              .attr("width", width + margin)
+              .attr("height", height + margin)
+            .append('g')
+                .attr('class','chart');
+
+      /*
+        Dimple.js Chart construction code
+      */
+          var myChart = new dimple.chart(svg, data);
+
+          var x = myChart.addTimeAxis("x", "date", "%Y-%m-%d", "%d %B");
+          x.title = "Date";
+          x.fontSize = "12";
+
+          var y1 = myChart.addMeasureAxis("y", "depdelay_mean");
+          y1.overrideMin = 0;
+          y1.title = "Departure Delay";
+
+
+          var y2 = myChart.addMeasureAxis("y", "n");
+          y2.title = "Number of flights";
+
+          var s1 = myChart.addSeries(null, dimple.plot.line, [x, y2]);
+          var s2 = myChart.addSeries(null, dimple.plot.line, [x, y1]);
+
+          myChart.draw();
+        };
+
+    </script>
+  </head>
+<body>
+  <script type="text/javascript">
+    d3.csv("data/2008_prep.csv", draw);
+
+  </script>
+</body>
+</html>

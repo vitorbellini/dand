@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+    
+    <style>
+      circle.dimple-series-1 {
+        fill: red;
+      }
+
+      body {
+        font-family: helvetica;
+      }
+
+      h1 {
+        text-align: center;
+      }
+      h4 {
+        text-align: center;
+      }
+      text {
+        font-size: 0.8em;
+      }
+      div#header {
+      	width: 800px;
+      	margin: auto;
+      }
+    </style>
+
+    <script type="text/javascript">
+      function draw(data) {
+      
+      /*
+        D3.js setup code
+      */
+
+          "use strict";
+          var margin = 75,
+              width = 1400 - margin,
+              height = 650 - margin;
+
+          d3.select("body")
+            .append("h1")
+            .text("Weekends and holidays effects on 2008 US flights");
+
+          d3.select("body")
+          	.append("div")
+          	.attr("id", "header")
+          	.style("width", 500)
+            .append("h4")
+            .text("The number of flights has one week frequency, peaking usually in friday and dipping on saturday. On holidays it occurs right before the date. Departure delays are usually higher on high flight number days but also could be affected by weather or other specific situation.");
+
+          var svg = d3.select("body")
+            .append("svg")
+              .attr("width", width + margin)
+              .attr("height", height + margin)
+            .append('g')
+                .attr('class','chart');
+
+
+      /*
+        Dimple.js Chart construction code
+      */
+          
+          var myChart = new dimple.chart(svg, data);
+
+          var x = myChart.addTimeAxis("x", "date", "%Y-%m-%d", "%d %B");
+          x.title = "Date";
+          x.showGridlines = true;
+
+          var y1 = myChart.addMeasureAxis("y", "depdelay_mean");
+          y1.overrideMin = 0;
+          y1.overrideMax = 60;
+          y1.title = "Departure delay average in minutes";
+          y1.showGridlines = true;
+
+
+
+          var y2 = myChart.addMeasureAxis("y", "n");
+          y2.title = "Number of flights";
+          //y2.showGridlines = true;
+
+          var s1 = myChart.addSeries("Departure Delay", dimple.plot.line, [x, y1]);          
+
+          var s2 = myChart.addSeries("Number of Flights", dimple.plot.line, [x, y2]);
+
+    
+          myChart.assignColor("Departure Delay", "black");
+          myChart.assignColor("Number of Flights", "rgb(224, 224, 224)");
+
+          myChart.addLegend(920, 30, 360, 20, "right");
+
+
+          myChart.draw();
+
+
+          // label important 2008 events
+          svg.append("text")
+            .attr("x", 900)
+            .attr("y", 125)
+            .text("2008 Financial Crisis");
+
+          svg.append("text")
+            .attr("x", 750)
+            .attr("y", 80)
+            .text("Summer Vacations");
+
+          svg.append("text")
+            .attr("x", 1190)
+            .attr("y", 130)
+            .text("Christmas");
+
+          svg.append("text")
+            .attr("x", 1075)
+            .attr("y", 310)
+            .text("Thanksgiving");
+
+          d3.selectAll("text.dimple-title")
+          	.style("font-size", 14);
+        };
+
+    </script>
+  </head>
+<body>
+  <script type="text/javascript">
+    d3.csv("data/2008_prep.csv", draw);
+
+  </script>
+</body>
+</html>

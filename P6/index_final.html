@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+    
+    <style>
+      circle.dimple-series-1 {
+        fill: red;
+      }
+
+      body {
+        font-family: helvetica;
+      }
+
+      h1 {
+        text-align: center;
+      }
+      h4 {
+        text-align: center;
+      }
+      text {
+        font-size: 0.8em;
+      }
+      div#header {
+      	width: 800px;
+      	margin: auto;
+      }
+    </style>
+
+    <script type="text/javascript">
+      function draw(data) {
+      
+      /*
+        D3.js setup code
+      */
+
+          "use strict";
+          var margin = 75,
+              width = 1400 - margin,
+              height = 650 - margin;
+
+          d3.select("body")
+            .append("h1")
+            .text("Weekends and holidays effects on 2008 US flights");
+
+          d3.select("body")
+          	.append("div")
+          	.attr("id", "header")
+          	.style("width", 500)
+            .append("h4")
+            .text("The number of flights has one week frequency, peaking usually in friday and dipping on saturday. On holidays it occurs right before the date. Departure delays are usually higher on high flight number days but also could be affected by weather or other specific situation.");
+
+          var svg = d3.select("body")
+            .append("svg")
+              .attr("width", width + margin)
+              .attr("height", height + margin)
+            .append('g')
+                .attr('class','chart');
+
+
+      /*
+        Dimple.js Chart construction code
+      */
+          
+          var myChart = new dimple.chart(svg, data);
+
+          var x = myChart.addTimeAxis("x", "date", "%Y-%m-%d", "%d %B");
+          x.title = "Date";
+          x.showGridlines = true;
+
+          var y1 = myChart.addMeasureAxis("y", "depdelay_mean");
+          y1.overrideMin = 0;
+          y1.overrideMax = 60;
+          y1.title = "Departure delay average in minutes";
+          y1.showGridlines = true;
+
+          var y2 = myChart.addMeasureAxis("y", "n");
+          y2.title = "Number of flights";
+
+
+          // calculate the mean delay for the year
+          var depdelay_overall_mean = d3.mean(data, function(d) {
+            return d.depdelay_mean;
+          });
+
+          var n_flights_overall_mean = d3.mean(data, function(d) {
+            return d.n;
+          });          
+
+          var min_date = d3.min(data, function(d) {
+            return d.date;
+          });
+
+          var max_date = d3.max(data, function(d) {
+            return d.date;
+          });          
+
+          // plot overall mean lines
+          var s3 = myChart.addSeries("n flights Mean", dimple.plot.line, [x, y2]);
+          s3.data = [
+            { "n flights Mean" : "2008 Number of Flights Mean", "n" : n_flights_overall_mean, "date" : min_date }, 
+            { "n flights Mean" : "2008 Number of Flights Mean", "n" : n_flights_overall_mean, "date" : max_date },
+          ];   
+
+          var s1 = myChart.addSeries("Departure Delay", dimple.plot.line, [x, y1]);          
+
+          var s2 = myChart.addSeries("Number of Flights", dimple.plot.line, [x, y2]);
+
+          // plot overall mean lines
+          var s4 = myChart.addSeries("Delay Mean", dimple.plot.line, [x, y1]);
+          s4.data = [
+            { "Delay Mean" : "2008 Departure Delay Mean", "depdelay_mean" : depdelay_overall_mean, "date" : min_date }, 
+            { "Delay Mean" : "2008 Departure Delay Mean", "depdelay_mean" : depdelay_overall_mean, "date" : max_date },
+          ];          
+
+
+          myChart.assignColor("Departure Delay", "black");
+          myChart.assignColor("Number of Flights", "rgb(224, 224, 224)");
+          myChart.assignColor("2008 Number of Flights Mean", "red");
+          myChart.assignColor("2008 Departure Delay Mean", "red");
+
+          myChart.addLegend(820, 20, 450, 20, "right", s1);
+          myChart.addLegend(700, 20, 450, 20, "right", s2);
+
+          myChart.draw();
+
+
+          // label important 2008 events
+          svg.append("text")
+            .attr("x", 900)
+            .attr("y", 125)
+            .text("2008 Financial Crisis");
+
+          svg.append("text")
+            .attr("x", 750)
+            .attr("y", 80)
+            .text("Summer Vacations");
+
+          svg.append("text")
+            .attr("x", 1190)
+            .attr("y", 130)
+            .text("Christmas");
+
+          svg.append("text")
+            .attr("x", 1075)
+            .attr("y", 310)
+            .text("Thanksgiving");
+
+          svg.append("text")
+            .attr("x", 928)
+            .attr("y", 45)
+            .style("font-size", 10)
+            .text("Red line represents means for number of flights and departure delay on 2008");                       
+
+          var f1 = d3.format(",.5r");
+
+          svg.append("text")
+            .attr("x", 1265)
+            .attr("y", 135)
+            .style("font-size", 10)
+            .style("color", "red")
+            .text("2008 mean: " + f1(n_flights_overall_mean));
+
+
+          var f2 = d3.format(".2f");
+
+          svg.append("text")
+            .attr("x", 60)
+            .attr("y", 520)
+            .style("font-size", 10)
+            .style("color", "rgb(224, 224, 224)")
+            .text("2008 mean: " + f2(depdelay_overall_mean));
+
+
+          d3.selectAll("text.dimple-title")
+          	.style("font-size", 14);
+
+
+          d3.selectAll(".dimple-series-0")
+            .attr("stroke-width", 1);
+            //.style("stroke-dasharray", 3);
+
+          d3.selectAll(".dimple-series-3")
+            .attr("stroke-width", 1);
+            //.style("stroke-dasharray", 3);   
+
+          d3.select("body")
+            .append("text")
+            .text("font: ")
+            .append("a")
+            .attr("xlink:href", "http://stat-computing.org/dataexpo/2009/the-data.html")
+            .text("Bureau of transportation Statistics (http://stat-computing.org/dataexpo/2009/the-data.html)");
+
+        };
+
+
+    </script>
+  </head>
+<body>
+  <script type="text/javascript">
+    d3.csv("data/2008_prep.csv", draw);
+
+  </script>
+<a href="http://www.google.com" target="_blank">teste</a>
+</body>
+</html>
