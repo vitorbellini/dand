@@ -14,7 +14,13 @@ Important events along the year that could have affected number of flights and d
 
 The library used to code the graph, dimple.js, has an builtin feature that allows reader interaction on the graph. Hovering the mouse on the line presents the detail of that point and marks the x and y axis positions. This feature is very handy to the reader get the detail of a specific day, and compare the peaks of number of flights and delays.
 
-To help the reader to compare the variations along the year, it was included on the graph two thin mean line, representing the overall mean for the year. To be clear on the visualization, near the y-axis was included a note for the mean line with the value and on the graph label a little description of the mean line.
+After feedbacks I've updated the graph with the following features:
+
+* Red thin mean lines representing the overall mean for the year. To be clear on the visualization, near the y-axis was included a note for the mean line with the value and on the graph label a little description of the mean line.
+
+* Footnote of the source of the data presented.
+
+* Custom interactive tool tips box with better labels and the day of the week.
 
 Initial design decisions where prototyped on R, with these results:
 
@@ -182,3 +188,5 @@ Number of flights scaled and delay over time (line + line):
 * https://github.com/d3/d3-format
 * http://jsfiddle.net/Ra2xS/28/
 * http://stat-computing.org/dataexpo/2009/the-data.html
+* http://bl.ocks.org/timelyportfolio/fe16f2df171c9e6f2f1e
+* https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md

@@ -124,6 +124,27 @@
           myChart.addLegend(820, 20, 450, 20, "right", s1);
           myChart.addLegend(700, 20, 450, 20, "right", s2);
 
+
+          // custom tooltip
+          var weekday = d3.time.format("%A");
+          var date_format = d3.time.format("%d %B %Y");
+
+          s1.getTooltipText = function(d) {
+          	return [
+                    "Departure Delay: " + f2(d.cy),
+                    "Date: " + date_format(d.cx),
+                    "Weekday: " + weekday(d.cx)
+                ];
+        	};
+
+          s2.getTooltipText = function(d) {
+          	return [
+                    "Number of flights: " + f1(d.cy),
+                    "Date: " + date_format(d.cx),
+                    "Weekday: " + weekday(d.cx)
+                ];
+        	};        
+
           myChart.draw();
 
 
@@ -180,11 +201,9 @@
 
           d3.selectAll(".dimple-series-0")
             .attr("stroke-width", 1);
-            //.style("stroke-dasharray", 3);
 
           d3.selectAll(".dimple-series-3")
             .attr("stroke-width", 1);
-            //.style("stroke-dasharray", 3);   
 
           d3.select("body")
             .append("text")
@@ -195,7 +214,6 @@
 
         };
 
-
     </script>
   </head>
 <body>
@@ -203,6 +221,5 @@
     d3.csv("data/2008_prep.csv", draw);
 
   </script>
-<a href="http://www.google.com" target="_blank">teste</a>
 </body>
 </html>
